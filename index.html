@@ -1,431 +1,578 @@
-import React from "react";
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Community Wellbeing Initiative — Public Service</title>
+  <meta name="description" content="Community Wellbeing Initiative: a non-profit public service program focusing on health, education, disaster response, environmental stewardship, and civic participation." />
+  <meta name="theme-color" content="#0b6e4f" />
+  <style>
+    :root{
+      --bg: #f7faf7;
+      --card: #ffffff;
+      --text: #0f1720;
+      --muted: #556270;
+      --accent: #0b6e4f;      /* deep fresh green */
+      --accent-2: #1b9e77;    /* secondary green */
+      --accent-light: #e6f6ef; /* light green tint for sections */
+      --callout: #fff7ed;
+      --max-width: 1100px;
+      --radius: 10px;
+      --gap: 20px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.6;
+    }
 
-// Single-file React component (Tailwind CSS required in parent project)
-// Default export: <HeritagePreservationPage />
+    /* Accessibility: skip link */
+    .skip-link{
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .skip-link:focus{
+      left: 10px;
+      top: 10px;
+      width: auto;
+      height: auto;
+      background: #000;
+      color: #fff;
+      padding: 8px 12px;
+      z-index: 9999;
+      border-radius: 4px;
+    }
 
-export default function HeritagePreservationPage() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-800">
-      <header className="bg-white/60 backdrop-blur-sm sticky top-0 z-40 border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-amber-300 to-rose-200 flex items-center justify-center shadow-sm">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path d="M3 12h18" stroke="#6b4f29" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M12 3v18" stroke="#6b4f29" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            </div>
-            <div>
-              <h1 className="text-lg font-semibold">Hearth &amp; Heritage</h1>
-              <p className="text-xs text-gray-500">
-                Preserving places, stories, and community memory
-              </p>
-            </div>
-          </div>
+    /* Page layout */
+    .container{
+      max-width: var(--max-width);
+      margin: 28px auto;
+      padding: 0 20px;
+    }
 
-          <nav
-            aria-label="Main navigation"
-            className="hidden md:flex gap-6 items-center text-sm"
-          >
-            <a href="#mission" className="hover:underline">Mission</a>
-            <a href="#history" className="hover:underline">History</a>
-            <a href="#programs" className="hover:underline">Programs</a>
-            <a href="#volunteer" className="hover:underline">Volunteer</a>
-            <a href="#resources" className="hover:underline">Resources</a>
-            <a
-              href="#contact"
-              className="px-3 py-1.5 bg-amber-100 rounded-md text-amber-800"
-            >
-              Contact
-            </a>
-          </nav>
+    header.site-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: var(--gap);
+      padding: 18px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+    }
+    .brand .seal{
+      width:56px;
+      height:56px;
+      display:inline-grid;
+      place-items:center;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(11,110,79,0.12), transparent 70%);
+      color: var(--accent);
+      font-weight:700;
+      font-size:18px;
+      border:2px solid rgba(11,110,79,0.12);
+    }
+    .brand h1{
+      font-size:1.15rem;
+      margin:0;
+      letter-spacing: -0.2px;
+    }
+    .brand p{
+      margin:0;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
 
-          <div className="md:hidden">
-            <button
-              aria-label="Open menu"
-              className="px-3 py-2 rounded-md bg-gray-100"
-            >
-              Menu
-            </button>
+    nav.primary-nav{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    nav.primary-nav a{
+      color:var(--accent-2);
+      text-decoration:none;
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:6px;
+    }
+    nav.primary-nav a:hover, nav.primary-nav a:focus{
+      background:var(--accent-light);
+      outline: none;
+    }
+
+    .hero{
+      background: linear-gradient(180deg, rgba(11,110,79,0.04), transparent 40%);
+      padding: 28px;
+      border-radius: var(--radius);
+      display:flex;
+      gap:24px;
+      align-items:center;
+      margin-top:8px;
+    }
+    .hero-content{
+      flex:1;
+      min-width:0;
+    }
+    .hero h2{
+      margin:0 0 8px 0;
+      font-size:1.6rem;
+      font-weight:700;
+      color:var(--text);
+    }
+    .hero p.lead{
+      margin:0 0 16px 0;
+      color:var(--muted);
+      font-size:1rem;
+    }
+    .hero .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+      border-color:rgba(0,0,0,0.04);
+    }
+    .btn-outline{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid var(--accent);
+    }
+    .btn-muted{
+      background:#ffffff;
+      color:var(--muted);
+      border:1px solid #e6ece8;
+    }
+
+    /* grid */
+    .grid{
+      display:grid;
+      gap:var(--gap);
+      margin-top:22px;
+    }
+    .grid-3{
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .grid-2{
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:10px;
+      box-shadow: 0 2px 6px rgba(9,20,16,0.04);
+      border: 1px solid rgba(11,110,79,0.04);
+    }
+    .card h3{ margin:0 0 8px 0; font-size:1.05rem; }
+    .muted { color: var(--muted); font-size:0.95rem; }
+
+    /* Impact counters */
+    .counters{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .counter{
+      flex:1;
+      min-width:160px;
+      text-align:center;
+      padding:14px;
+      border-radius:8px;
+      background: linear-gradient(180deg,#ffffff, #fbfffd);
+      border: 1px solid rgba(11,110,79,0.03);
+    }
+    .counter strong{ display:block; font-size:1.5rem; color:var(--accent-2); }
+    .counter span{ color:var(--muted); font-size:0.95rem; }
+
+    /* Volunteer & donate columns */
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      gap:18px;
+      align-items:start;
+    }
+    form input, form textarea, form select{
+      width:100%;
+      padding:10px;
+      margin-top:8px;
+      border-radius:6px;
+      border:1px solid #dfeee6;
+      background: #ffffff;
+      font-size:0.95rem;
+    }
+    form label{ font-weight:600; font-size:0.95rem; color:var(--text); }
+    form .small { font-size:0.9rem; color:var(--muted); margin-top:6px; }
+
+    footer{
+      margin-top:28px;
+      padding:18px 0;
+      border-top:1px solid rgba(11,110,79,0.06);
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    /* FAQ */
+    details summary{
+      cursor: pointer;
+      font-weight:600;
+      padding:12px;
+      border-radius:8px;
+      background: #fafcfb;
+      border:1px solid rgba(11,110,79,0.03);
+      list-style:none;
+    }
+    details[open] summary { background: var(--accent-light); }
+
+    /* responsive */
+    @media (max-width:980px){
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .split{ grid-template-columns: 1fr; }
+      .brand .seal{ display:none; }
+    }
+
+    /* focus outlines for keyboard users */
+    a:focus, button:focus, input:focus, textarea:focus, select:focus{
+      outline: 3px solid rgba(11,110,79,0.18);
+      outline-offset:2px;
+    }
+
+    /* print */
+    @media print{
+      body{ background:#fff; color:#000; }
+      .hero, nav.primary-nav, .btn{ display:none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="container" role="banner">
+    <header class="site-header" aria-label="Site header">
+      <div class="brand" aria-hidden="false">
+        <div class="seal" aria-hidden="true">CWI</div>
+        <div>
+          <h1>Community Wellbeing Initiative</h1>
+          <p>Advancing public health, education, and civic resilience</p>
+        </div>
+      </div>
+
+      <nav class="primary-nav" role="navigation" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#get-involved">Get Involved</a>
+        <a href="#resources">Resources</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="main" tabindex="-1" role="main" aria-labelledby="hero-heading">
+      <section class="hero" aria-labelledby="hero-heading" role="region" aria-describedby="hero-desc">
+        <div class="hero-content">
+          <h2 id="hero-heading">Working together for resilient, equitable communities</h2>
+          <p id="hero-desc" class="lead">The Community Wellbeing Initiative (CWI) is a non-profit public service organization committed to improving quality of life by delivering evidence-based programs in public health, education equity, disaster response, environmental stewardship, and civic engagement. We operate transparently, partner with local governments and agencies, and measure impact to ensure programs serve those most in need.</p>
+
+          <div class="actions" role="group" aria-label="Primary actions">
+            <a class="btn btn-primary" href="#get-involved">Donate</a>
+            <a class="btn btn-outline" href="#get-involved">Volunteer</a>
+            <a class="btn btn-muted" href="#programs">Explore Programs</a>
           </div>
         </div>
-      </header>
 
-      <main>
-        <section className="relative">
-          <div className="h-72 md:h-96 lg:h-[420px] w-full overflow-hidden rounded-b-3xl">
-            <img
-              src="https://source.unsplash.com/1600x900/?historic,heritage,architecture"
-              alt="Historic building facade"
-              className="w-full h-full object-cover brightness-90"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/80" />
-            <div className="absolute inset-0 flex items-end">
-              <div className="max-w-6xl mx-auto px-6 pb-10">
-                <div className="bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-md max-w-3xl">
-                  <h2 className="text-3xl md:text-4xl font-extrabold">
-                    Safeguarding Our Shared Past
-                  </h2>
-                  <p className="mt-3 text-gray-700">
-                    We connect community voices, historical research, and practical
-                    conservation to ensure heritage sites and traditions thrive for
-                    generations to come.
-                  </p>
-                  <div className="mt-4 flex gap-3">
-                    <a
-                      href="#programs"
-                      className="inline-block px-4 py-2 rounded-md bg-amber-500 text-white shadow"
-                    >
-                      Explore Programs
-                    </a>
-                    <a
-                      href="#volunteer"
-                      className="inline-block px-4 py-2 rounded-md border border-amber-200"
-                    >
-                      Become a Volunteer
-                    </a>
-                  </div>
-                </div>
-              </div>
+        <div class="card" aria-hidden="false">
+          <h3 class="muted">Focused Priorities</h3>
+          <ul class="muted" style="margin-top:10px; padding-left:18px;">
+            <li>Public health access and preventive services</li>
+            <li>Educational support for underserved learners</li>
+            <li>Rapid, coordinated disaster relief</li>
+            <li>Local environmental resilience projects</li>
+            <li>Civic participation and neighborhood leadership</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="grid grid-2" role="region" aria-labelledby="about-heading" style="margin-top:22px;">
+        <div class="card">
+          <h2 id="about-heading">About Community Wellbeing Initiative</h2>
+          <p class="muted">Founded in 2010, CWI exists to strengthen communities through targeted public services and long-term capacity building. We combine field operations, policy analysis, and community partnerships to close gaps in services and to support local leadership. We prioritize data-driven interventions, equity, and transparent stewardship of public and private funds.</p>
+
+          <h3 style="margin-top:14px">Mission</h3>
+          <p class="muted">To deliver practical, measurable programs that protect public health, expand educational opportunity, and improve community resilience — especially for vulnerable populations.</p>
+
+          <h3 style="margin-top:12px">Vision & Values</h3>
+          <p class="muted"><strong>Vision:</strong> Thriving, self-reliant communities where access to essential services is universal.<br />
+          <strong>Core values:</strong> Service, transparency, inclusion, evidence-based practice, and stewardship.</p>
+        </div>
+
+        <aside class="card" aria-labelledby="impact-heading" role="complementary">
+          <h3 id="impact-heading">2024 Annual Highlights</h3>
+          <div class="counters" style="margin-top:10px;">
+            <div class="counter" aria-hidden="false">
+              <strong>120,000+</strong>
+              <span>people reached through health outreach</span>
+            </div>
+            <div class="counter">
+              <strong>15,200</strong>
+              <span>hours of volunteer service</span>
+            </div>
+            <div class="counter">
+              <strong>320</strong>
+              <span>community resilience projects launched</span>
             </div>
           </div>
-        </section>
 
-        <section id="mission" className="max-w-6xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-            <div className="md:col-span-2">
-              <h3 className="text-2xl font-bold">Our Mission</h3>
-              <p className="mt-3 text-gray-700 leading-relaxed">
-                Hearth &amp; Heritage is dedicated to nurturing the cultural
-                landscapes that define local identity. We focus on preserving
-                historic buildings, oral histories, intangible traditions, and
-                public art while supporting inclusive access and education. Our
-                guiding principles are care, collaboration, and continuity.
-              </p>
+          <p class="muted" style="margin-top:12px">Our programs are audited and publicly reported. We maintain strong partnerships with municipal agencies, local school districts, and regional emergency management offices.</p>
+        </aside>
+      </section>
 
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-lg bg-white shadow-sm">
-                  <h4 className="font-semibold">Community-Led</h4>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Projects begin with local knowledge and respect for living
-                    traditions.
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg bg-white shadow-sm">
-                  <h4 className="font-semibold">Sustainable Care</h4>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Conservation plans prioritize low-impact, long-term solutions.
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg bg-white shadow-sm">
-                  <h4 className="font-semibold">Open Learning</h4>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Education programs make history accessible to all ages.
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg bg-white shadow-sm">
-                  <h4 className="font-semibold">Inclusive Stewardship</h4>
-                  <p className="text-sm text-gray-600 mt-1">
-                    We amplify diverse voices and respectful dialogue in
-                    decision-making.
-                  </p>
-                </div>
-              </div>
-            </div>
+      <!-- Programs -->
+      <section id="programs" class="card" role="region" aria-labelledby="programs-heading" style="margin-top:22px;">
+        <h2 id="programs-heading">Programs & Services</h2>
+        <p class="muted">CWI administers a portfolio of active programs organized by domain. Each program is developed with subject-matter experts and evaluated on outcome metrics such as service reach, beneficiary satisfaction, and measurable improvement in local indicators.</p>
 
-            <aside className="p-6 rounded-xl bg-amber-50 border border-amber-100">
-              <h4 className="font-semibold">Quick Facts</h4>
-              <ul className="mt-3 text-sm text-gray-700 space-y-2">
-                <li><strong>Founded:</strong> 2004</li>
-                <li><strong>Focus Areas:</strong> Architecture, Oral History, Public Art</li>
-                <li><strong>Volunteers:</strong> 1,200+ active</li>
-                <li><strong>Working Region:</strong> Regional &amp; cross-cultural partnerships</li>
-              </ul>
-            </aside>
-          </div>
-        </section>
+        <div class="grid grid-3" style="margin-top:14px;">
+          <article class="card" aria-labelledby="health-heading">
+            <h3 id="health-heading">Public Health Access</h3>
+            <p class="muted">Mobile clinics, vaccination drives, mental health hotlines, and preventive health workshops. We target underserved neighborhoods and work with local health departments to remove barriers to care.</p>
+            <p class="muted"><strong>Key activities:</strong> mobile clinics, screening events, community health worker training.</p>
+          </article>
 
-        <section id="history" className="bg-gray-50 py-12">
-          <div className="max-w-6xl mx-auto px-6">
-            <h3 className="text-2xl font-bold">History &amp; Timeline</h3>
-            <p className="mt-2 text-gray-600">
-              A brief overview of milestones and initiatives that shaped our
-              approach.
-            </p>
+          <article class="card" aria-labelledby="education-heading">
+            <h3 id="education-heading">Education & Youth Development</h3>
+            <p class="muted">After-school tutoring, college-prep workshops, digital literacy training, and scholarship support. Programs emphasize measurable academic gains and college/career readiness.</p>
+            <p class="muted"><strong>Key activities:</strong> tutoring networks, scholarship administration, teacher partnerships.</p>
+          </article>
 
-            <ol className="mt-6 space-y-6">
-              <li className="flex gap-4 items-start">
-                <div className="flex-none w-10 h-10 rounded-full bg-white border flex items-center justify-center shadow-sm">2004</div>
-                <div>
-                  <h4 className="font-semibold">Founding and First Restoration</h4>
-                  <p className="text-gray-700 mt-1">
-                    Established by local historians and craftspeople to restore a
-                    cluster of 19th-century civic buildings.
-                  </p>
-                </div>
-              </li>
+          <article class="card" aria-labelledby="disaster-heading">
+            <h3 id="disaster-heading">Disaster Response & Resilience</h3>
+            <p class="muted">Rapid needs assessment, supply coordination, shelter support, and long-term recovery planning. CWI maintains an on-call logistics team to coordinate with state and local emergency management.</p>
+            <p class="muted"><strong>Key activities:</strong> rapid mobilization, supply chain coordination, recovery grants.</p>
+          </article>
 
-              <li className="flex gap-4 items-start">
-                <div className="flex-none w-10 h-10 rounded-full bg-white border flex items-center justify-center shadow-sm">2010</div>
-                <div>
-                  <h4 className="font-semibold">Oral History Program Launch</h4>
-                  <p className="text-gray-700 mt-1">
-                    Launched a community interview series to record stories from
-                    elders and practitioners.
-                  </p>
-                </div>
-              </li>
+          <article class="card" aria-labelledby="environment-heading">
+            <h3 id="environment-heading">Environmental Stewardship</h3>
+            <p class="muted">Local restoration projects, community gardens, urban tree planting, and civic education on climate resilience. Projects prioritize co-benefits like food security and stormwater management.</p>
+            <p class="muted"><strong>Key activities:</strong> restoration, green infrastructure pilots, volunteer plantings.</p>
+          </article>
 
-              <li className="flex gap-4 items-start">
-                <div className="flex-none w-10 h-10 rounded-full bg-white border flex items-center justify-center shadow-sm">2018</div>
-                <div>
-                  <h4 className="font-semibold">Cultural Mapping Initiative</h4>
-                  <p className="text-gray-700 mt-1">
-                    Partnered with universities to map intangible cultural assets
-                    and community networks.
-                  </p>
-                </div>
-              </li>
+          <article class="card" aria-labelledby="civic-heading">
+            <h3 id="civic-heading">Civic Participation & Capacity Building</h3>
+            <p class="muted">Leadership training, community planning workshops, and voter information drives. We support local leaders and help communities engage effectively with public decision-making processes.</p>
+            <p class="muted"><strong>Key activities:</strong> leadership academies, planning facilitation, civic information campaigns.</p>
+          </article>
 
-              <li className="flex gap-4 items-start">
-                <div className="flex-none w-10 h-10 rounded-full bg-white border flex items-center justify-center shadow-sm">2023</div>
-                <div>
-                  <h4 className="font-semibold">Public Education &amp; Digital Archive</h4>
-                  <p className="text-gray-700 mt-1">
-                    Published an open-access archive and a school curriculum for
-                    local history.
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </section>
+          <article class="card" aria-labelledby="research-heading">
+            <h3 id="research-heading">Policy & Research</h3>
+            <p class="muted">Applied research and evaluation to inform policy and scale effective interventions. Reports and datasets are published to support evidence-based policymaking.</p>
+            <p class="muted"><strong>Key activities:</strong> program evaluation, policy briefs, public datasets.</p>
+          </article>
+        </div>
+      </section>
 
-        <section id="programs" className="max-w-6xl mx-auto px-6 py-12">
-          <h3 className="text-2xl font-bold">Programs &amp; Events</h3>
-          <p className="mt-2 text-gray-600">
-            Meaningful ways to engage: hands-on conservation, walks, workshops,
-            and exhibitions.
-          </p>
+      <!-- Get Involved -->
+      <section id="get-involved" class="card" role="region" aria-labelledby="get-involved-heading" style="margin-top:22px;">
+        <h2 id="get-involved-heading">Get Involved</h2>
+        <p class="muted">CWI works through partnerships and volunteers. We welcome donations, in-kind support, and volunteers with diverse skills. Below are common ways to contribute.</p>
 
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <article className="rounded-xl p-5 bg-white shadow-sm">
-              <img
-                src="https://source.unsplash.com/600x400/?restoration,tools"
-                alt="conservation tools"
-                className="w-full h-40 object-cover rounded-md"
-              />
-              <h4 className="mt-3 font-semibold">Hands-On Conservation</h4>
-              <p className="text-sm text-gray-600 mt-1">
-                Short-term projects teach basic conservation skills and material
-                care to community volunteers.
-              </p>
-              <div className="mt-3 text-sm text-gray-500">
-                Next session: Apr 12 • Duration: 1 day
-              </div>
-            </article>
+        <div class="split" style="margin-top:14px;">
+          <div>
+            <h3>Volunteer Opportunities</h3>
+            <p class="muted">Volunteers support programs across health outreach, tutoring, event logistics, and environmental projects. We offer role-specific trainings and schedule flexibility.</p>
 
-            <article className="rounded-xl p-5 bg-white shadow-sm">
-              <img
-                src="https://source.unsplash.com/600x400/?walking,tour,history"
-                alt="walking tour"
-                className="w-full h-40 object-cover rounded-md"
-              />
-              <h4 className="mt-3 font-semibold">Heritage Walks &amp; Talks</h4>
-              <p className="text-sm text-gray-600 mt-1">
-                Guided walks highlight overlooked sites and stories, led by local
-                custodians and guides.
-              </p>
-              <div className="mt-3 text-sm text-gray-500">
-                Weekly • Meet at City Square
-              </div>
-            </article>
+            <h4 style="margin-top:10px">Examples of volunteer roles</h4>
+            <ul class="muted" style="padding-left:18px;">
+              <li>Community Health Outreach Assistant (training provided)</li>
+              <li>After-School Tutor (subject specialization)</li>
+              <li>Event Logistics & Supply Coordinator</li>
+              <li>Urban Greening Volunteer</li>
+            </ul>
 
-            <article className="rounded-xl p-5 bg-white shadow-sm">
-              <img
-                src="https://source.unsplash.com/600x400/?classroom,workshop"
-                alt="workshop"
-                className="w-full h-40 object-cover rounded-md"
-              />
-              <h4 className="mt-3 font-semibold">School &amp; Community Workshops</h4>
-              <p className="text-sm text-gray-600 mt-1">
-                Curriculum modules and creative workshops for young learners keep
-                local heritage alive in classrooms.
-              </p>
-              <div className="mt-3 text-sm text-gray-500">
-                Custom programs for schools available
-              </div>
-            </article>
-          </div>
-        </section>
+            <h4 style="margin-top:12px">Volunteer form</h4>
+            <form aria-label="Volunteer sign up form" onsubmit="event.preventDefault(); alert('This is a demo form. In production it posts to the server.');">
+              <label for="vname">Full name</label>
+              <input id="vname" name="vname" type="text" required />
 
-        <section id="volunteer" className="bg-amber-50 py-12">
-          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold">Get Involved</h3>
-              <p className="mt-3 text-gray-700">
-                Volunteers are the heart of our work. Whether you can spare a few
-                hours or offer professional skills, there is a place for you.
-              </p>
+              <label for="vemail">Email address</label>
+              <input id="vemail" name="vemail" type="email" required />
 
-              <ul className="mt-4 text-gray-700 space-y-3">
-                <li>Conservation assistants: basic material care and site maintenance.</li>
-                <li>Oral history interviewers: training provided for respectful listening and recording.</li>
-                <li>Event hosts &amp; educators: welcome visitors and lead small groups.</li>
-                <li>Cataloguers &amp; digitizers: help curate our digital archive.</li>
-              </ul>
-            </div>
+              <label for="vrole">Preferred role</label>
+              <select id="vrole" name="vrole">
+                <option>Community Health Outreach</option>
+                <option>Education & Tutoring</option>
+                <option>Event Logistics</option>
+                <option>Environmental Projects</option>
+              </select>
 
-            <form className="p-6 bg-white rounded-xl shadow-sm">
-              <h4 className="font-semibold">Volunteer sign-up</h4>
-              <p className="text-sm text-gray-600 mt-2">
-                We’ll contact you with upcoming opportunities.
-              </p>
+              <label for="vnotes">Additional notes</label>
+              <textarea id="vnotes" name="vnotes" rows="3" placeholder="Availability, relevant experience"></textarea>
 
-              <label className="block mt-4 text-sm">
-                <span className="text-gray-700">Full name</span>
-                <input
-                  type="text"
-                  className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-2"
-                  placeholder="Jane Doe"
-                  aria-label="Full name"
-                />
-              </label>
-
-              <label className="block mt-3 text-sm">
-                <span className="text-gray-700">Email</span>
-                <input
-                  type="email"
-                  className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-2"
-                  placeholder="you@example.com"
-                  aria-label="Email"
-                />
-              </label>
-
-              <label className="block mt-3 text-sm">
-                <span className="text-gray-700">Interests</span>
-                <select
-                  className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-2"
-                  aria-label="Interests"
-                >
-                  <option>Conservation</option>
-                  <option>Oral History</option>
-                  <option>Events</option>
-                  <option>Archive Work</option>
-                </select>
-              </label>
-
-              <button
-                type="button"
-                className="mt-4 w-full inline-block px-4 py-2 rounded-md bg-amber-500 text-white"
-              >
-                Sign Up
-              </button>
+              <p class="small">CWI will contact applicants within 10 business days of submission.</p>
+              <button class="btn btn-primary" type="submit" style="margin-top:10px;">Submit</button>
             </form>
           </div>
-        </section>
 
-        <section id="resources" className="max-w-6xl mx-auto px-6 py-12">
-          <h3 className="text-2xl font-bold">Resources &amp; Publications</h3>
-          <p className="mt-2 text-gray-600">
-            A curated selection of reports, guidelines, and learning materials for
-            practitioners and the curious public.
-          </p>
+          <aside class="card" aria-labelledby="donate-heading">
+            <h3 id="donate-heading">Donate</h3>
+            <p class="muted">Donations support program delivery, training, and local grants. CWI maintains rigorous financial controls and publicly posts audited financials each year.</p>
 
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-white rounded-lg shadow-sm">
-              <h4 className="font-semibold">Conservation Handbook</h4>
-              <p className="text-sm text-gray-600 mt-1">
-                Practical guidance for small-scale care of historic materials and
-                structures.
-              </p>
-              <div className="mt-3 text-sm">
-                <a href="#" className="underline">Download (PDF)</a>
-              </div>
-            </div>
+            <h4 style="margin-top:10px">Ways to give</h4>
+            <ul class="muted" style="padding-left:18px;">
+              <li>One-time online donation (secure)</li>
+              <li>Monthly sustaining gifts</li>
+              <li>Corporate partnerships and matching gifts</li>
+              <li>In-kind donations subject to acceptance criteria</li>
+            </ul>
 
-            <div className="p-4 bg-white rounded-lg shadow-sm">
-              <h4 className="font-semibold">Oral History Starter Kit</h4>
-              <p className="text-sm text-gray-600 mt-1">
-                Interview templates, consent forms, and tips for recording
-                long-form memories.
-              </p>
-              <div className="mt-3 text-sm">
-                <a href="#" className="underline">Open resource</a>
-              </div>
-            </div>
+            <p class="muted" style="margin-top:12px"><strong>Note:</strong> This sample page does not process real donations. In production, donation forms are hosted on secured, PCI-compliant platforms.</p>
 
-            <div className="p-4 bg-white rounded-lg shadow-sm">
-              <h4 className="font-semibold">Curriculum for Schools</h4>
-              <p className="text-sm text-gray-600 mt-1">
-                Lesson plans and field-trip suggestions to bring local history
-                into classrooms.
-              </p>
-              <div className="mt-3 text-sm">
-                <a href="#" className="underline">View lessons</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="bg-gray-50 py-12">
-          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-bold">Contact &amp; Visit</h3>
-              <p className="mt-3 text-gray-700">
-                We welcome respectful visits and thoughtful questions. Please
-                reach out before bringing groups to on-site projects.
-              </p>
-
-              <dl className="mt-4 text-sm text-gray-700 space-y-2">
-                <div>
-                  <dt className="font-semibold">Address</dt>
-                  <dd>128 Heritage Lane, Oldtown</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold">Email</dt>
-                  <dd>hello@hearth-heritage.org</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold">Phone</dt>
-                  <dd>+1 (555) 123-4567</dd>
-                </div>
-              </dl>
-            </div>
-
-            <div className="rounded-lg overflow-hidden bg-white shadow-sm">
-              <div className="p-6">
-                <h4 className="font-semibold">Visiting Hours</h4>
-                <p className="mt-1 text-sm text-gray-600">Tue—Sat: 10:00 — 16:00</p>
-
-                <div className="mt-4">
-                  <div className="w-full h-44 bg-gray-100 flex items-center justify-center text-gray-400">
-                    Map placeholder
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer className="mt-12 border-t border-gray-100 bg-white/50">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-gray-600">
-            © {new Date().getFullYear()} Hearth &amp; Heritage. All rights reserved.
-          </div>
-          <div className="text-sm text-gray-600">
-            Built with care — Accessibility friendly • Open access materials
-          </div>
+            <a class="btn btn-outline" href="#contact" style="display:inline-block; margin-top:12px;">Contact Development Team</a>
+          </aside>
         </div>
-      </footer>
-    </div>
-  );
-}
+      </section>
+
+      <!-- Resources & News -->
+      <section id="resources" class="grid grid-2" role="region" aria-labelledby="resources-heading" style="margin-top:22px;">
+        <div class="card">
+          <h2 id="resources-heading">Resources & Reports</h2>
+          <p class="muted">Selected publications and resources to support practitioners and the public.</p>
+
+          <ul style="padding-left:18px; margin-top:10px;" class="muted">
+            <li><strong>Community Resilience Playbook (2024)</strong> — practical guidance for local governments and NGOs.</li>
+            <li><strong>Annual Impact Report (2024)</strong> — program outcomes, financials, and audited statements.</li>
+            <li><strong>Public Health Outreach Toolkit</strong> — templates, staffing guides, and evaluation measures.</li>
+          </ul>
+
+          <p class="muted" style="margin-top:10px;">All resources are available at no cost. To request copies or translations, contact our resource team.</p>
+        </div>
+
+        <div class="card" aria-labelledby="news-heading">
+          <h2 id="news-heading">News & Events</h2>
+          <article style="margin-top:8px;">
+            <h3 style="margin:0 0 6px 0;">Community Vaccination Drive — March 12, 2025</h3>
+            <p class="muted" style="margin:0 0 8px 0;">A citywide vaccination event in partnership with the County Health Department. Over 4,000 residents served.</p>
+          </article>
+
+          <article style="margin-top:12px;">
+            <h3 style="margin:0 0 6px 0;">Green Neighborhoods Pilot Launch — January 22, 2025</h3>
+            <p class="muted" style="margin:0;">New green infrastructure projects to reduce flood risk and expand community gardens.</p>
+          </article>
+
+          <p class="muted" style="margin-top:12px;">Subscribe to our newsletter for monthly updates and opportunities.</p>
+          <form onsubmit="event.preventDefault(); alert('Subscribed (demo)');" aria-label="Newsletter subscription">
+            <label for="news-email">Email</label>
+            <input id="news-email" type="email" placeholder="you@example.org" required />
+            <button class="btn btn-primary" type="submit" style="margin-top:8px;">Subscribe</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="card" role="region" aria-labelledby="faq-heading" style="margin-top:22px;">
+        <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+        <details style="margin-top:10px;">
+          <summary>How does CWI ensure funds are used responsibly?</summary>
+          <div class="muted" style="padding:10px 6px;">
+            CWI adheres to strict internal controls, annual independent audits, and transparent public reporting. Grants and contracts undergo competitive procurement and compliance review.
+          </div>
+        </details>
+
+        <details style="margin-top:8px;">
+          <summary>Who is eligible to receive services?</summary>
+          <div class="muted" style="padding:10px 6px;">
+            Services are designed to prioritize low-income, marginalized, and otherwise underserved community members. Eligibility varies by program and is provided in each program's guidelines.
+          </div>
+        </details>
+
+        <details style="margin-top:8px;">
+          <summary>How can organizations partner with CWI?</summary>
+          <div class="muted" style="padding:10px 6px;">
+            Collaborations are established via memoranda of understanding (MOUs), partnership agreements, or cooperative grants. Contact our partnerships team for consultation.
+          </div>
+        </details>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="card" role="region" aria-labelledby="contact-heading" style="margin-top:22px;">
+        <h2 id="contact-heading">Contact & Legal Information</h2>
+
+        <div class="grid grid-2" style="margin-top:12px;">
+          <div>
+            <h3>Head Office</h3>
+            <p class="muted">
+              Community Wellbeing Initiative<br />
+              123 Civic Center Drive<br />
+              Springfield, State 01234<br />
+              Phone: (555) 555-0100<br />
+              Email: info@cwi-example.org
+            </p>
+
+            <h3 style="margin-top:12px">Media & Press</h3>
+            <p class="muted">For media inquiries and press kits, please contact press@cwi-example.org.</p>
+          </div>
+
+          <aside>
+            <h3>Legal & Governance</h3>
+            <p class="muted">CWI is a registered 501(c)(3) non-profit organization. Federal EIN: 12-3456789. Annual reports and governance documents are available upon request.</p>
+
+            <h3 style="margin-top:12px">Accessibility</h3>
+            <p class="muted">We are committed to digital accessibility. If you encounter barriers using this site, please contact accessibility@cwi-example.org and we will provide an alternative format upon request.</p>
+          </aside>
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer role="contentinfo" aria-label="Site footer">
+      <div style="display:flex; justify-content:space-between; gap:18px; align-items:center; flex-wrap:wrap;">
+        <div>
+          <p style="margin:0; font-weight:700;">Community Wellbeing Initiative</p>
+          <p style="margin:0;" class="muted">Working for stronger, healthier communities</p>
+        </div>
+
+        <div class="muted" style="text-align:right;">
+          <p style="margin:0;">Privacy • Terms • Accessibility</p>
+          <p style="margin:0; margin-top:6px;">© Community Wellbeing Initiative — All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Structured data for basic organization info (non-sensitive) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Community Wellbeing Initiative",
+      "url": "https://example.org/",
+      "logo": "",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+1-555-555-0100",
+        "contactType": "customer service",
+        "email": "info@cwi-example.org"
+      }],
+      "sameAs": []
+    }
+  </script>
+</body>
+</html>
