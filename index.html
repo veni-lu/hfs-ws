@@ -12,567 +12,101 @@
       --card: #ffffff;
       --text: #0f1720;
       --muted: #556270;
-      --accent: #0b6e4f;      /* deep fresh green */
-      --accent-2: #1b9e77;    /* secondary green */
-      --accent-light: #e6f6ef; /* light green tint for sections */
-      --callout: #fff7ed;
+      --accent: #0b6e4f;
+      --accent-2: #1b9e77;
+      --accent-light: #e6f6ef;
       --max-width: 1100px;
       --radius: 10px;
       --gap: 20px;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
       color: var(--text);
       background-color: var(--bg);
       line-height: 1.6;
     }
 
-    /* Accessibility: skip link */
-    .skip-link{
-      position: absolute;
-      left: -999px;
-      top: auto;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
-    .skip-link:focus{
-      left: 10px;
-      top: 10px;
-      width: auto;
-      height: auto;
-      background: #000;
-      color: #fff;
-      padding: 8px 12px;
-      z-index: 9999;
-      border-radius: 4px;
-    }
+    .container{ max-width: var(--max-width); margin: 28px auto; padding: 0 20px; }
 
-    /* Page layout */
-    .container{
-      max-width: var(--max-width);
-      margin: 28px auto;
-      padding: 0 20px;
-    }
+    header.site-header{ display:flex; align-items:center; justify-content:space-between; gap: var(--gap); padding: 18px 0; }
+    .brand h1{ font-size:1.15rem; margin:0; }
+    .brand p{ margin:0; color:var(--muted); font-size:0.92rem; }
 
-    header.site-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: var(--gap);
-      padding: 18px 0;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 12px;
-    }
-    .brand .seal{
-      width:56px;
-      height:56px;
-      display:inline-grid;
-      place-items:center;
-      border-radius:12px;
-      background: linear-gradient(180deg, rgba(11,110,79,0.12), transparent 70%);
-      color: var(--accent);
-      font-weight:700;
-      font-size:18px;
-      border:2px solid rgba(11,110,79,0.12);
-    }
-    .brand h1{
-      font-size:1.15rem;
-      margin:0;
-      letter-spacing: -0.2px;
-    }
-    .brand p{
-      margin:0;
-      color:var(--muted);
-      font-size:0.92rem;
-    }
+    nav.primary-nav{ display:flex; gap:12px; }
+    nav.primary-nav a{ color:var(--accent-2); text-decoration:none; font-weight:600; padding:8px 10px; border-radius:6px; }
+    nav.primary-nav a:hover{ background:var(--accent-light); }
 
-    nav.primary-nav{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    nav.primary-nav a{
-      color:var(--accent-2);
-      text-decoration:none;
-      font-weight:600;
-      padding:8px 10px;
-      border-radius:6px;
-    }
-    nav.primary-nav a:hover, nav.primary-nav a:focus{
-      background:var(--accent-light);
-      outline: none;
-    }
+    .hero{ background: linear-gradient(180deg, rgba(11,110,79,0.04), transparent 40%); padding: 28px; border-radius: var(--radius); display:flex; gap:24px; }
+    .hero h2{ margin:0 0 8px 0; font-size:1.6rem; }
+    .hero p.lead{ margin:0; color:var(--muted); }
 
-    .hero{
-      background: linear-gradient(180deg, rgba(11,110,79,0.04), transparent 40%);
-      padding: 28px;
-      border-radius: var(--radius);
-      display:flex;
-      gap:24px;
-      align-items:center;
-      margin-top:8px;
-    }
-    .hero-content{
-      flex:1;
-      min-width:0;
-    }
-    .hero h2{
-      margin:0 0 8px 0;
-      font-size:1.6rem;
-      font-weight:700;
-      color:var(--text);
-    }
-    .hero p.lead{
-      margin:0 0 16px 0;
-      color:var(--muted);
-      font-size:1rem;
-    }
-    .hero .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .btn{
-      display:inline-block;
-      padding:10px 14px;
-      border-radius:8px;
-      text-decoration:none;
-      font-weight:700;
-      border:1px solid transparent;
-      cursor:pointer;
-    }
-    .btn-primary{
-      background:var(--accent);
-      color:#fff;
-      border-color:rgba(0,0,0,0.04);
-    }
-    .btn-outline{
-      background:transparent;
-      color:var(--accent);
-      border:1px solid var(--accent);
-    }
-    .btn-muted{
-      background:#ffffff;
-      color:var(--muted);
-      border:1px solid #e6ece8;
-    }
+    .card{ background:var(--card); padding:18px; border-radius:10px; box-shadow: 0 2px 6px rgba(9,20,16,0.04); border: 1px solid rgba(11,110,79,0.04); }
 
-    /* grid */
-    .grid{
-      display:grid;
-      gap:var(--gap);
-      margin-top:22px;
-    }
-    .grid-3{
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .grid-2{
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .card{
-      background:var(--card);
-      padding:18px;
-      border-radius:10px;
-      box-shadow: 0 2px 6px rgba(9,20,16,0.04);
-      border: 1px solid rgba(11,110,79,0.04);
-    }
-    .card h3{ margin:0 0 8px 0; font-size:1.05rem; }
-    .muted { color: var(--muted); font-size:0.95rem; }
+    .grid{ display:grid; gap:var(--gap); margin-top:22px; }
+    .grid-2{ grid-template-columns: repeat(2, 1fr); }
+    .grid-3{ grid-template-columns: repeat(3, 1fr); }
 
-    /* Impact counters */
-    .counters{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .counter{
-      flex:1;
-      min-width:160px;
-      text-align:center;
-      padding:14px;
-      border-radius:8px;
-      background: linear-gradient(180deg,#ffffff, #fbfffd);
-      border: 1px solid rgba(11,110,79,0.03);
-    }
-    .counter strong{ display:block; font-size:1.5rem; color:var(--accent-2); }
-    .counter span{ color:var(--muted); font-size:0.95rem; }
+    footer{ margin-top:28px; padding:18px 0; border-top:1px solid rgba(11,110,79,0.06); color:var(--muted); font-size:0.95rem; }
 
-    /* Volunteer & donate columns */
-    .split{
-      display:grid;
-      grid-template-columns: 1fr 340px;
-      gap:18px;
-      align-items:start;
-    }
-    form input, form textarea, form select{
-      width:100%;
-      padding:10px;
-      margin-top:8px;
-      border-radius:6px;
-      border:1px solid #dfeee6;
-      background: #ffffff;
-      font-size:0.95rem;
-    }
-    form label{ font-weight:600; font-size:0.95rem; color:var(--text); }
-    form .small { font-size:0.9rem; color:var(--muted); margin-top:6px; }
-
-    footer{
-      margin-top:28px;
-      padding:18px 0;
-      border-top:1px solid rgba(11,110,79,0.06);
-      color:var(--muted);
-      font-size:0.95rem;
-    }
-
-    /* FAQ */
-    details summary{
-      cursor: pointer;
-      font-weight:600;
-      padding:12px;
-      border-radius:8px;
-      background: #fafcfb;
-      border:1px solid rgba(11,110,79,0.03);
-      list-style:none;
-    }
-    details[open] summary { background: var(--accent-light); }
-
-    /* responsive */
-    @media (max-width:980px){
-      .grid-3{ grid-template-columns: 1fr; }
-      .grid-2{ grid-template-columns: 1fr; }
-      .split{ grid-template-columns: 1fr; }
-      .brand .seal{ display:none; }
-    }
-
-    /* focus outlines for keyboard users */
-    a:focus, button:focus, input:focus, textarea:focus, select:focus{
-      outline: 3px solid rgba(11,110,79,0.18);
-      outline-offset:2px;
-    }
-
-    /* print */
-    @media print{
-      body{ background:#fff; color:#000; }
-      .hero, nav.primary-nav, .btn{ display:none; }
-    }
+    @media (max-width:980px){ .grid-2, .grid-3{ grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-
-  <div class="container" role="banner">
-    <header class="site-header" aria-label="Site header">
-      <div class="brand" aria-hidden="false">
-        <div class="seal" aria-hidden="true">CWI</div>
-        <div>
-          <h1>Community Wellbeing Initiative</h1>
-          <p>Advancing public health, education, and civic resilience</p>
-        </div>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+        <h1>Community Wellbeing Initiative</h1>
+        <p>Advancing public health, education, and civic resilience</p>
       </div>
-
-      <nav class="primary-nav" role="navigation" aria-label="Primary navigation">
+      <nav class="primary-nav">
         <a href="#about">About</a>
         <a href="#programs">Programs</a>
         <a href="#get-involved">Get Involved</a>
         <a href="#resources">Resources</a>
-        <a href="#contact">Contact</a>
       </nav>
     </header>
 
-    <main id="main" tabindex="-1" role="main" aria-labelledby="hero-heading">
-      <section class="hero" aria-labelledby="hero-heading" role="region" aria-describedby="hero-desc">
-        <div class="hero-content">
-          <h2 id="hero-heading">Working together for resilient, equitable communities</h2>
-          <p id="hero-desc" class="lead">The Community Wellbeing Initiative (CWI) is a non-profit public service organization committed to improving quality of life by delivering evidence-based programs in public health, education equity, disaster response, environmental stewardship, and civic engagement. We operate transparently, partner with local governments and agencies, and measure impact to ensure programs serve those most in need.</p>
-
-          <div class="actions" role="group" aria-label="Primary actions">
-            <a class="btn btn-primary" href="#get-involved">Donate</a>
-            <a class="btn btn-outline" href="#get-involved">Volunteer</a>
-            <a class="btn btn-muted" href="#programs">Explore Programs</a>
-          </div>
-        </div>
-
-        <div class="card" aria-hidden="false">
-          <h3 class="muted">Focused Priorities</h3>
-          <ul class="muted" style="margin-top:10px; padding-left:18px;">
-            <li>Public health access and preventive services</li>
-            <li>Educational support for underserved learners</li>
-            <li>Rapid, coordinated disaster relief</li>
-            <li>Local environmental resilience projects</li>
-            <li>Civic participation and neighborhood leadership</li>
-          </ul>
+    <main>
+      <section class="hero">
+        <div>
+          <h2>Working together for resilient, equitable communities</h2>
+          <p class="lead">The Community Wellbeing Initiative (CWI) is a public service organization committed to improving quality of life through evidence-based programs in health, education, disaster preparedness, environmental stewardship, and civic participation.</p>
         </div>
       </section>
 
-      <!-- About -->
-      <section id="about" class="grid grid-2" role="region" aria-labelledby="about-heading" style="margin-top:22px;">
-        <div class="card">
-          <h2 id="about-heading">About Community Wellbeing Initiative</h2>
-          <p class="muted">Founded in 2010, CWI exists to strengthen communities through targeted public services and long-term capacity building. We combine field operations, policy analysis, and community partnerships to close gaps in services and to support local leadership. We prioritize data-driven interventions, equity, and transparent stewardship of public and private funds.</p>
-
-          <h3 style="margin-top:14px">Mission</h3>
-          <p class="muted">To deliver practical, measurable programs that protect public health, expand educational opportunity, and improve community resilience — especially for vulnerable populations.</p>
-
-          <h3 style="margin-top:12px">Vision & Values</h3>
-          <p class="muted"><strong>Vision:</strong> Thriving, self-reliant communities where access to essential services is universal.<br />
-          <strong>Core values:</strong> Service, transparency, inclusion, evidence-based practice, and stewardship.</p>
-        </div>
-
-        <aside class="card" aria-labelledby="impact-heading" role="complementary">
-          <h3 id="impact-heading">2024 Annual Highlights</h3>
-          <div class="counters" style="margin-top:10px;">
-            <div class="counter" aria-hidden="false">
-              <strong>120,000+</strong>
-              <span>people reached through health outreach</span>
-            </div>
-            <div class="counter">
-              <strong>15,200</strong>
-              <span>hours of volunteer service</span>
-            </div>
-            <div class="counter">
-              <strong>320</strong>
-              <span>community resilience projects launched</span>
-            </div>
-          </div>
-
-          <p class="muted" style="margin-top:12px">Our programs are audited and publicly reported. We maintain strong partnerships with municipal agencies, local school districts, and regional emergency management offices.</p>
-        </aside>
+      <section id="about" class="card" style="margin-top:22px;">
+        <h2>About Us</h2>
+        <p class="muted">Founded to serve the public interest, CWI focuses on long-term community capacity building. Our work emphasizes transparency, measurable outcomes, and collaboration with local stakeholders.</p>
+        <p class="muted"><strong>Mission:</strong> To strengthen communities by ensuring equitable access to essential public services.</p>
+        <p class="muted"><strong>Values:</strong> Service, integrity, inclusion, accountability, and evidence-based decision-making.</p>
       </section>
 
-      <!-- Programs -->
-      <section id="programs" class="card" role="region" aria-labelledby="programs-heading" style="margin-top:22px;">
-        <h2 id="programs-heading">Programs & Services</h2>
-        <p class="muted">CWI administers a portfolio of active programs organized by domain. Each program is developed with subject-matter experts and evaluated on outcome metrics such as service reach, beneficiary satisfaction, and measurable improvement in local indicators.</p>
-
-        <div class="grid grid-3" style="margin-top:14px;">
-          <article class="card" aria-labelledby="health-heading">
-            <h3 id="health-heading">Public Health Access</h3>
-            <p class="muted">Mobile clinics, vaccination drives, mental health hotlines, and preventive health workshops. We target underserved neighborhoods and work with local health departments to remove barriers to care.</p>
-            <p class="muted"><strong>Key activities:</strong> mobile clinics, screening events, community health worker training.</p>
-          </article>
-
-          <article class="card" aria-labelledby="education-heading">
-            <h3 id="education-heading">Education & Youth Development</h3>
-            <p class="muted">After-school tutoring, college-prep workshops, digital literacy training, and scholarship support. Programs emphasize measurable academic gains and college/career readiness.</p>
-            <p class="muted"><strong>Key activities:</strong> tutoring networks, scholarship administration, teacher partnerships.</p>
-          </article>
-
-          <article class="card" aria-labelledby="disaster-heading">
-            <h3 id="disaster-heading">Disaster Response & Resilience</h3>
-            <p class="muted">Rapid needs assessment, supply coordination, shelter support, and long-term recovery planning. CWI maintains an on-call logistics team to coordinate with state and local emergency management.</p>
-            <p class="muted"><strong>Key activities:</strong> rapid mobilization, supply chain coordination, recovery grants.</p>
-          </article>
-
-          <article class="card" aria-labelledby="environment-heading">
-            <h3 id="environment-heading">Environmental Stewardship</h3>
-            <p class="muted">Local restoration projects, community gardens, urban tree planting, and civic education on climate resilience. Projects prioritize co-benefits like food security and stormwater management.</p>
-            <p class="muted"><strong>Key activities:</strong> restoration, green infrastructure pilots, volunteer plantings.</p>
-          </article>
-
-          <article class="card" aria-labelledby="civic-heading">
-            <h3 id="civic-heading">Civic Participation & Capacity Building</h3>
-            <p class="muted">Leadership training, community planning workshops, and voter information drives. We support local leaders and help communities engage effectively with public decision-making processes.</p>
-            <p class="muted"><strong>Key activities:</strong> leadership academies, planning facilitation, civic information campaigns.</p>
-          </article>
-
-          <article class="card" aria-labelledby="research-heading">
-            <h3 id="research-heading">Policy & Research</h3>
-            <p class="muted">Applied research and evaluation to inform policy and scale effective interventions. Reports and datasets are published to support evidence-based policymaking.</p>
-            <p class="muted"><strong>Key activities:</strong> program evaluation, policy briefs, public datasets.</p>
-          </article>
-        </div>
+      <section id="programs" class="grid grid-3">
+        <div class="card"><h3>Public Health</h3><p class="muted">Preventive care outreach, health education, and community wellness initiatives.</p></div>
+        <div class="card"><h3>Education Support</h3><p class="muted">Academic enrichment, digital literacy, and youth development programs.</p></div>
+        <div class="card"><h3>Disaster Preparedness</h3><p class="muted">Emergency planning, response coordination, and recovery assistance.</p></div>
+        <div class="card"><h3>Environmental Stewardship</h3><p class="muted">Local sustainability projects and environmental resilience efforts.</p></div>
+        <div class="card"><h3>Civic Engagement</h3><p class="muted">Leadership training and community participation initiatives.</p></div>
+        <div class="card"><h3>Policy & Research</h3><p class="muted">Applied research to inform effective public service delivery.</p></div>
       </section>
 
-      <!-- Get Involved -->
-      <section id="get-involved" class="card" role="region" aria-labelledby="get-involved-heading" style="margin-top:22px;">
-        <h2 id="get-involved-heading">Get Involved</h2>
-        <p class="muted">CWI works through partnerships and volunteers. We welcome donations, in-kind support, and volunteers with diverse skills. Below are common ways to contribute.</p>
-
-        <div class="split" style="margin-top:14px;">
-          <div>
-            <h3>Volunteer Opportunities</h3>
-            <p class="muted">Volunteers support programs across health outreach, tutoring, event logistics, and environmental projects. We offer role-specific trainings and schedule flexibility.</p>
-
-            <h4 style="margin-top:10px">Examples of volunteer roles</h4>
-            <ul class="muted" style="padding-left:18px;">
-              <li>Community Health Outreach Assistant (training provided)</li>
-              <li>After-School Tutor (subject specialization)</li>
-              <li>Event Logistics & Supply Coordinator</li>
-              <li>Urban Greening Volunteer</li>
-            </ul>
-
-            <h4 style="margin-top:12px">Volunteer form</h4>
-            <form aria-label="Volunteer sign up form" onsubmit="event.preventDefault(); alert('This is a demo form. In production it posts to the server.');">
-              <label for="vname">Full name</label>
-              <input id="vname" name="vname" type="text" required />
-
-              <label for="vemail">Email address</label>
-              <input id="vemail" name="vemail" type="email" required />
-
-              <label for="vrole">Preferred role</label>
-              <select id="vrole" name="vrole">
-                <option>Community Health Outreach</option>
-                <option>Education & Tutoring</option>
-                <option>Event Logistics</option>
-                <option>Environmental Projects</option>
-              </select>
-
-              <label for="vnotes">Additional notes</label>
-              <textarea id="vnotes" name="vnotes" rows="3" placeholder="Availability, relevant experience"></textarea>
-
-              <p class="small">CWI will contact applicants within 10 business days of submission.</p>
-              <button class="btn btn-primary" type="submit" style="margin-top:10px;">Submit</button>
-            </form>
-          </div>
-
-          <aside class="card" aria-labelledby="donate-heading">
-            <h3 id="donate-heading">Donate</h3>
-            <p class="muted">Donations support program delivery, training, and local grants. CWI maintains rigorous financial controls and publicly posts audited financials each year.</p>
-
-            <h4 style="margin-top:10px">Ways to give</h4>
-            <ul class="muted" style="padding-left:18px;">
-              <li>One-time online donation (secure)</li>
-              <li>Monthly sustaining gifts</li>
-              <li>Corporate partnerships and matching gifts</li>
-              <li>In-kind donations subject to acceptance criteria</li>
-            </ul>
-
-            <p class="muted" style="margin-top:12px"><strong>Note:</strong> This sample page does not process real donations. In production, donation forms are hosted on secured, PCI-compliant platforms.</p>
-
-            <a class="btn btn-outline" href="#contact" style="display:inline-block; margin-top:12px;">Contact Development Team</a>
-          </aside>
-        </div>
+      <section id="get-involved" class="card" style="margin-top:22px;">
+        <h2>Get Involved</h2>
+        <p class="muted">Public participation and volunteer engagement are central to our mission. We encourage individuals and organizations to contribute time, expertise, and resources to support community wellbeing.</p>
       </section>
 
-      <!-- Resources & News -->
-      <section id="resources" class="grid grid-2" role="region" aria-labelledby="resources-heading" style="margin-top:22px;">
-        <div class="card">
-          <h2 id="resources-heading">Resources & Reports</h2>
-          <p class="muted">Selected publications and resources to support practitioners and the public.</p>
-
-          <ul style="padding-left:18px; margin-top:10px;" class="muted">
-            <li><strong>Community Resilience Playbook (2024)</strong> — practical guidance for local governments and NGOs.</li>
-            <li><strong>Annual Impact Report (2024)</strong> — program outcomes, financials, and audited statements.</li>
-            <li><strong>Public Health Outreach Toolkit</strong> — templates, staffing guides, and evaluation measures.</li>
-          </ul>
-
-          <p class="muted" style="margin-top:10px;">All resources are available at no cost. To request copies or translations, contact our resource team.</p>
-        </div>
-
-        <div class="card" aria-labelledby="news-heading">
-          <h2 id="news-heading">News & Events</h2>
-          <article style="margin-top:8px;">
-            <h3 style="margin:0 0 6px 0;">Community Vaccination Drive — March 12, 2025</h3>
-            <p class="muted" style="margin:0 0 8px 0;">A citywide vaccination event in partnership with the County Health Department. Over 4,000 residents served.</p>
-          </article>
-
-          <article style="margin-top:12px;">
-            <h3 style="margin:0 0 6px 0;">Green Neighborhoods Pilot Launch — January 22, 2025</h3>
-            <p class="muted" style="margin:0;">New green infrastructure projects to reduce flood risk and expand community gardens.</p>
-          </article>
-
-          <p class="muted" style="margin-top:12px;">Subscribe to our newsletter for monthly updates and opportunities.</p>
-          <form onsubmit="event.preventDefault(); alert('Subscribed (demo)');" aria-label="Newsletter subscription">
-            <label for="news-email">Email</label>
-            <input id="news-email" type="email" placeholder="you@example.org" required />
-            <button class="btn btn-primary" type="submit" style="margin-top:8px;">Subscribe</button>
-          </form>
-        </div>
+      <section id="resources" class="card" style="margin-top:22px;">
+        <h2>Resources & Publications</h2>
+        <ul class="muted">
+          <li>Annual Impact Report</li>
+          <li>Community Resilience Guidelines</li>
+          <li>Public Health Outreach Toolkit</li>
+        </ul>
       </section>
-
-      <!-- FAQ -->
-      <section class="card" role="region" aria-labelledby="faq-heading" style="margin-top:22px;">
-        <h2 id="faq-heading">Frequently Asked Questions</h2>
-
-        <details style="margin-top:10px;">
-          <summary>How does CWI ensure funds are used responsibly?</summary>
-          <div class="muted" style="padding:10px 6px;">
-            CWI adheres to strict internal controls, annual independent audits, and transparent public reporting. Grants and contracts undergo competitive procurement and compliance review.
-          </div>
-        </details>
-
-        <details style="margin-top:8px;">
-          <summary>Who is eligible to receive services?</summary>
-          <div class="muted" style="padding:10px 6px;">
-            Services are designed to prioritize low-income, marginalized, and otherwise underserved community members. Eligibility varies by program and is provided in each program's guidelines.
-          </div>
-        </details>
-
-        <details style="margin-top:8px;">
-          <summary>How can organizations partner with CWI?</summary>
-          <div class="muted" style="padding:10px 6px;">
-            Collaborations are established via memoranda of understanding (MOUs), partnership agreements, or cooperative grants. Contact our partnerships team for consultation.
-          </div>
-        </details>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact" class="card" role="region" aria-labelledby="contact-heading" style="margin-top:22px;">
-        <h2 id="contact-heading">Contact & Legal Information</h2>
-
-        <div class="grid grid-2" style="margin-top:12px;">
-          <div>
-            <h3>Head Office</h3>
-            <p class="muted">
-              Community Wellbeing Initiative<br />
-              123 Civic Center Drive<br />
-              Springfield, State 01234<br />
-              Phone: (555) 555-0100<br />
-              Email: info@cwi-example.org
-            </p>
-
-            <h3 style="margin-top:12px">Media & Press</h3>
-            <p class="muted">For media inquiries and press kits, please contact press@cwi-example.org.</p>
-          </div>
-
-          <aside>
-            <h3>Legal & Governance</h3>
-            <p class="muted">CWI is a registered 501(c)(3) non-profit organization. Federal EIN: 12-3456789. Annual reports and governance documents are available upon request.</p>
-
-            <h3 style="margin-top:12px">Accessibility</h3>
-            <p class="muted">We are committed to digital accessibility. If you encounter barriers using this site, please contact accessibility@cwi-example.org and we will provide an alternative format upon request.</p>
-          </aside>
-        </div>
-
-      </section>
-
     </main>
 
-    <footer role="contentinfo" aria-label="Site footer">
-      <div style="display:flex; justify-content:space-between; gap:18px; align-items:center; flex-wrap:wrap;">
-        <div>
-          <p style="margin:0; font-weight:700;">Community Wellbeing Initiative</p>
-          <p style="margin:0;" class="muted">Working for stronger, healthier communities</p>
-        </div>
-
-        <div class="muted" style="text-align:right;">
-          <p style="margin:0;">Privacy • Terms • Accessibility</p>
-          <p style="margin:0; margin-top:6px;">© Community Wellbeing Initiative — All rights reserved.</p>
-        </div>
-      </div>
+    <footer>
+      <p><strong>Community Wellbeing Initiative</strong></p>
+      <p>Dedicated to public service and community resilience</p>
     </footer>
   </div>
-
-  <!-- Structured data for basic organization info (non-sensitive) -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Community Wellbeing Initiative",
-      "url": "https://example.org/",
-      "logo": "",
-      "contactPoint": [{
-        "@type": "ContactPoint",
-        "telephone": "+1-555-555-0100",
-        "contactType": "customer service",
-        "email": "info@cwi-example.org"
-      }],
-      "sameAs": []
-    }
-  </script>
 </body>
 </html>
